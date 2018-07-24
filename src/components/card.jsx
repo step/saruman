@@ -2,9 +2,11 @@ import React from "react"
 import Title from "./title.jsx"
 import Legend from "./legend.jsx"
 
+import {card} from "./card.module.styl"
+
 export default (props)=>{
   const {title,img,symbols,content}=props.data;
-  return <article className="card">
+  return <article className={card}>
   <header>
     <Title title={title} img={img}></Title>
     <Legend symbols={symbols}></Legend>

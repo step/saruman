@@ -1,6 +1,7 @@
 import {graphql} from "gatsby"
 import React from "react"
 import Card from "../components/card.jsx"
+import InternTable from "../components/internTable.jsx"
 import summarise from "../lib/summarise_intern.js"
 import _ from "lodash"
 
@@ -13,9 +14,10 @@ const asCard = (internSummary) => {
     avatar,
     lastCommitPerProject} = internSummary;
 
-  const cardData = {title: intern, img: avatar, content: "hello"};
+  const cardData = {title: intern, img: avatar};
   const keys=["numberOfPushes","numberOfProjects"];
   cardData.symbols = _.map(keys,(key)=>toSymbol(internSummary,key));
+  cardData.content = <InternTable projects={lastCommitPerProject}></InternTable>
   return <Card data={cardData}></Card>
 }
 

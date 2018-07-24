@@ -18,7 +18,7 @@ const summariseSingleIntern = (jobDetails,intern) => {
   result.numberOfProjects=_.keys(byProjects).length;
   result.lastCommitPerProject=_.map(byProjects,(projectDetails,project)=>{
     const {node: {commit: {timestamp}}} = projectDetails[0];
-    return {project, timestamp};
+    return {name:project, timestamp};
   });
   return result;
 }
