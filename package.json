@@ -9,10 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "0.1.0-11",
     "gatsby": "^2.0.0-beta.55",
     "gatsby-plugin-stylus": "^2.0.0-beta.5",
     "gatsby-source-mongodb": "^1.5.21",
+    "i": "^0.3.6",
     "lodash": "^4.17.10",
+    "npm": "^6.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "stylus": "^0.54.5"

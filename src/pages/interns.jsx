@@ -1,12 +1,15 @@
 import {graphql} from "gatsby"
 import React from "react"
 import Card from "../components/card.jsx"
+import Cards from "../components/cards.jsx"
 import InternTable from "../components/internTable.jsx"
 import summarise from "../lib/summarise_intern.js"
+import icons from "../components/icons.jsx"
 import _ from "lodash"
 
+
 const toSymbol=(summary,key)=>{
-  return {icon:<i className="fas fa-upload"></i>, text: summary[key]}
+  return {icon:icons[key], text: summary[key]}
 }
 
 const asCard = (internSummary) => {
@@ -25,9 +28,7 @@ export default (props) => {
   const {allMongodbSauronResults: {edges}} = props.data;
   const byIntern=summarise(edges);
   const cards=byIntern.map(asCard);
-  return <section className="cards">
-    {cards}
-  </section>
+  return <Cards cards={cards}></Cards>
 }
 
 export const pageQuery = graphql`

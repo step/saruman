@@ -5,7 +5,7 @@ export default (props)=>{
   const {icon,text}=props;
 
   return <div className={key}>
-  {icon}
-  {text}
+  <span>{icon}</span>
+  <span>{text}</span>
   </div>
 }
