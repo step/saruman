@@ -10,13 +10,15 @@ const createRow = (project) => {
 const createHeaderRow = () => {
   return <thead>
     <tr>
-      <th>project</th>
+      <th>intern</th>
       <th>last committed</th>
     </tr>
   </thead>
 }
 
 export default (props) => {
-  const projectRows = props.projects.map(createRow)
+  const numberOfRows=props.numberOfRows || 3;
+  const rows=props.projects.slice(0,numberOfRows);
+  const projectRows = rows.map(createRow)
   return <table>{createHeaderRow()}<tbody>{projectRows}</tbody></table>
 }

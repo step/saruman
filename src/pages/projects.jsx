@@ -1,22 +1,50 @@
-import React from "react";
-import {graphql} from "gatsby";
-import _ from "lodash";
+import {graphql} from "gatsby"
+import React from "react"
+import summarise from "../lib/summarise_project.js"
+import InternTable from "../components/internTable.jsx"
+import Card from "../components/card.jsx"
+import Cards from "../components/cards.jsx"
+import icons from "../components/icons.jsx"
+import _ from "lodash"
 
-export default ({data:{allMongodbSauronResults: {edges}}})=>{
-  let byProjects=_.groupBy(edges,(edge)=>{
-    return edge.node.project?edge.node.project.name:"unknown";
-  });
-  let listItems=_.map(byProjects,(info,project)=><li>{project}</li>)
-  return <div><ul>{listItems}</ul></div>;
+const toSymbol=(summary,key)=>{
+  return {icon:icons[key], text: summary[key]}
+}
+
+const asCard = (projectSummary) => {
+  const {project,
+    avatar,
+    lastCommitPerIntern} = projectSummary;
+
+  const cardData = {title: project, img: avatar};
+  const keys=["numberOfPushes","numberOfInterns"];
+  cardData.symbols = _.map(keys,(key)=>toSymbol(projectSummary,key));
+  cardData.content = <InternTable projects={lastCommitPerIntern} numberOfRows={5}></InternTable>
+  return <Card data={cardData}></Card>
+}
+
+export default (props) => {
+  const {allMongodbSauronResults: {edges}} = props.data;
+  const byProject=summarise(edges);
+  console.log(byProject);
+  const cards=byProject.map(asCard);
+  return <Cards cards={cards}></Cards>
 }
 
 export const pageQuery = graphql`
 query Projects {
-  allMongodbSauronResults {
+  allMongodbSauronResults(sort: {fields: [commit___timestamp],order:DESC}) {
     edges {
       node {
+        author {
+          username
+        }
         project {
           name
+        }
+        commit {
+          id
+          timestamp(fromNow:true)
         }
       }
     }
