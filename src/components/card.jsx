@@ -2,7 +2,7 @@ import React from "react"
 import Title from "./title.jsx"
 import Legend from "./legend.jsx"
 
-import cardStyles from "./card.module.styl"
+import cardStyles from "./card.module.scss"
 
 export default (props)=>{
   const {title,img,symbols,content}=props.data;

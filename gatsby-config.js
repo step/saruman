@@ -7,6 +7,6 @@ module.exports = {
       resolve: `gatsby-source-mongodb`,
       options: {dbName: `sauron`, collection:`results`}
     },
-    `gatsby-plugin-stylus`
+    `gatsby-plugin-sass`
   ]
 }

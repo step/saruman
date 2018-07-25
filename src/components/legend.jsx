@@ -1,6 +1,6 @@
 import React from "react"
 import Symbol from "./symbol.jsx"
-import {legend} from "./legend.module.styl"
+import {legend} from "./legend.module.scss"
 
 export default (props)=>{
   const {symbols}=props;

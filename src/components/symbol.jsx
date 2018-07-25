@@ -1,5 +1,5 @@
 import React from "react"
-import {key} from "./symbol.module.styl"
+import {key} from "./symbol.module.scss"
 
 export default (props)=>{
   const {icon,text}=props;
