@@ -1,3 +1,7 @@
+$img-width: 32px;
+$img-padding: 4px;
+$content-padding: $img-width + $img-padding - 2;
+
 .card {
   font-family: sans-serif;
   font-size: 12px;
@@ -5,27 +9,37 @@
   width: 240px;
   font-size: 14px;
   padding: 8px;
+  margin: 4px;
   header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-bottom: 4px;
     border-bottom: 1px solid lightgray;
     figure {
       margin: 0;
       display: flex;
       align-items: center;
       img {
-        width: 32px;
+        width: $img-width;
         border-radius: 50%;
-        padding: 3px;
+        padding-right: $img-padding;
       }
     }
   }
 }
 .content {
+  padding-left: $content-padding;
+  padding-top: 5px;
   table {
     font-size: 12px;
     width: 100%;
     text-align: left;
+    thead {
+      color: gray;
+      th {
+        border-bottom: 1px solid lightgray;
+      }
+    }
   }
 }
