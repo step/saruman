@@ -2,7 +2,7 @@ import {graphql} from "gatsby"
 import React from "react"
 import Card from "../components/card.jsx"
 import Cards from "../components/cards.jsx"
-import InternTable from "../components/internTable.jsx"
+import Table from "../components/custom_table.jsx"
 import summarise from "../lib/summarise_intern.js"
 import icons from "../components/icons.jsx"
 import _ from "lodash"
@@ -10,6 +10,14 @@ import _ from "lodash"
 
 const toSymbol=(summary,key)=>{
   return {icon:icons[key], text: summary[key]}
+}
+
+const createTable=(rows)=>{
+  const headers=[
+    {key:"name", header:"project"},
+    {key:"timestamp", header:"last committed"}
+  ];
+  return <Table rows={rows} headers={headers}></Table>
 }
 
 const asCard = (internSummary) => {
@@ -20,7 +28,7 @@ const asCard = (internSummary) => {
   const cardData = {title: intern, img: avatar};
   const keys=["numberOfPushes","numberOfProjects"];
   cardData.symbols = _.map(keys,(key)=>toSymbol(internSummary,key));
-  cardData.content = <InternTable projects={lastCommitPerProject}></InternTable>
+  cardData.content = createTable(lastCommitPerProject,["name","timestamp"])
   return <Card data={cardData}></Card>
 }
 

@@ -1,7 +1,7 @@
 import {graphql} from "gatsby"
 import React from "react"
 import summarise from "../lib/summarise_project.js"
-import InternTable from "../components/internTable.jsx"
+import Table from "../components/custom_table.jsx"
 import Card from "../components/card.jsx"
 import Cards from "../components/cards.jsx"
 import icons from "../components/icons.jsx"
@@ -9,6 +9,14 @@ import _ from "lodash"
 
 const toSymbol=(summary,key)=>{
   return {icon:icons[key], text: summary[key]}
+}
+
+const createTable=(rows)=>{
+  const headers=[
+    {key:"name", header:"intern"},
+    {key:"timestamp", header:"last committed"}
+  ];
+  return <Table rows={rows} headers={headers}></Table>
 }
 
 const asCard = (projectSummary) => {
@@ -19,14 +27,13 @@ const asCard = (projectSummary) => {
   const cardData = {title: project, img: avatar};
   const keys=["numberOfPushes","numberOfInterns"];
   cardData.symbols = _.map(keys,(key)=>toSymbol(projectSummary,key));
-  cardData.content = <InternTable projects={lastCommitPerIntern} numberOfRows={5}></InternTable>
+  cardData.content = createTable(lastCommitPerIntern);
   return <Card data={cardData}></Card>
 }
 
 export default (props) => {
   const {allMongodbSauronResults: {edges}} = props.data;
   const byProject=summarise(edges);
-  console.log(byProject);
   const cards=byProject.map(asCard);
   return <Cards cards={cards}></Cards>
 }
