@@ -44,7 +44,10 @@ query Projects {
     edges {
       node {
         author {
-          username
+          username {
+            id
+            image
+          }
         }
         project {
           name

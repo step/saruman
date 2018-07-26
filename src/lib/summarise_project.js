@@ -5,7 +5,7 @@ const pushes = (jobDetails)=> {
 }
 
 const interns = (jobDetails)=> {
-  return _.groupBy(jobDetails,({node:{author:{username}}})=>username);
+  return _.groupBy(jobDetails,({node:{author:{username:{id}}}})=>id);
 }
 
 const summariseSingleProject = (jobDetails,project) => {
@@ -25,7 +25,7 @@ const summariseSingleProject = (jobDetails,project) => {
 
 export default (data) => {
   const filteredData=data.filter(({node})=>{
-    return node.author && node.project && node.commit;
+    return node.author && node.author.username && node.project && node.commit;
   });
   const grouped=_.groupBy(filteredData,({node:{project:{name}}})=>name);
   return _.map(grouped,summariseSingleProject);

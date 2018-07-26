@@ -9,9 +9,10 @@ const projects = (jobDetails)=> {
 }
 
 const summariseSingleIntern = (jobDetails,intern) => {
+  console.log(intern,jobDetails);
   let result={};
   result.intern=intern;
-  result.avatar="https://avatars3.githubusercontent.com/u/131062?v=4";
+  result.avatar=jobDetails[0].node.author.username.image;
   result.numberOfPushes=_.keys(pushes(jobDetails)).length;
 
   const byProjects=projects(jobDetails);
@@ -25,8 +26,8 @@ const summariseSingleIntern = (jobDetails,intern) => {
 
 export default (data) => {
   const filteredData=data.filter(({node})=>{
-    return node.author && node.project && node.commit;
+    return node.author && node.author.username && node.project && node.commit;
   });
-  const grouped=_.groupBy(filteredData,({node:{author:{username}}})=>username);
+  const grouped=_.groupBy(filteredData,({node:{author:{username:{id}}}})=>id);
   return _.map(grouped,summariseSingleIntern);
 }
