@@ -11,9 +11,9 @@ const createHeader = (headers) => {
 }
 
 export default (props) => {
-  const {rows,headers} = props;
-  console.log(rows);
-  const tableRows = rows.map((row)=>createRow(row,headers));
+  let {rows,headers,limit} = props;
+  limit = limit || 3;
+  const tableRows = rows.slice(0,limit).map((row)=>createRow(row,headers));
   const tableHeaders = createHeader(headers);
 
   return <table>{tableHeaders}<tbody>{tableRows}</tbody></table>
